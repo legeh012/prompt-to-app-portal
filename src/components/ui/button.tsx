@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -15,6 +15,11 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Futuristic neon variants
+        neon: "bg-gradient-to-r from-neon-cyan to-neon-purple text-space-dark font-semibold shadow-lg hover:shadow-neon-cyan/50 hover:scale-105 transform transition-all duration-300 border-0",
+        "neon-outline": "border-2 border-neon-cyan bg-transparent text-neon-cyan hover:bg-neon-cyan hover:text-space-dark hover:shadow-lg hover:shadow-neon-cyan/50 transition-all duration-300",
+        "neon-ghost": "bg-transparent text-neon-purple hover:bg-neon-purple/10 hover:text-neon-cyan transition-all duration-300 border border-neon-purple/30",
+        glass: "glass-card text-foreground hover:bg-white/10 backdrop-blur-xl border border-white/20 transition-all duration-300 hover:border-neon-cyan/50",
       },
       size: {
         default: "h-10 px-4 py-2",
