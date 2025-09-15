@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { GoogleSignInButton } from "@/components/GoogleSignInButton";
 import { Zap, Play } from "lucide-react";
 import babHeroImage from "@/assets/bab-hero.jpg";
 
@@ -27,15 +28,21 @@ export const HeroSection = () => {
               </p>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="neon" size="lg" className="text-lg px-8 py-6" aria-label="Start building your app for free">
-                <Zap className="mr-2" />
-                Start Building Free
-              </Button>
-              <Button variant="neon-outline" size="lg" className="text-lg px-8 py-6" aria-label="Watch product demo video">
-                <Play className="mr-2" />
-                Watch Demo
-              </Button>
+            <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button variant="neon" size="lg" className="text-lg px-8 py-6" aria-label="Start building your app for free">
+                  <Zap className="mr-2" />
+                  Start Building Free
+                </Button>
+                <Button variant="neon-outline" size="lg" className="text-lg px-8 py-6" aria-label="Watch product demo video">
+                  <Play className="mr-2" />
+                  Watch Demo
+                </Button>
+              </div>
+              
+              <div className="max-w-sm">
+                <GoogleSignInButton />
+              </div>
             </div>
           </div>
           
