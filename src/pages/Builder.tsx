@@ -6,7 +6,8 @@ import { ProjectsList } from "@/components/builder/ProjectsList";
 import { PromptGenerator } from "@/components/builder/PromptGenerator";
 import { CodeEditor } from "@/components/builder/CodeEditor";
 import { LivePreview } from "@/components/builder/LivePreview";
-import { Sparkles, Code, Globe, Zap } from "lucide-react";
+import { AIChatBox } from "@/components/builder/AIChatBox";
+import { Sparkles, Code, Globe, Zap, MessageSquare } from "lucide-react";
 
 const Builder = () => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
@@ -58,29 +59,26 @@ const Builder = () => {
 
           {/* Main Content */}
           <div className="col-span-9 space-y-6">
-            {/* AI Prompt Generator */}
-            <Card className="bg-gradient-to-br from-primary/5 to-background border-primary/20">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Zap className="h-5 w-5 text-primary" />
-                  AI-Powered Generation
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <PromptGenerator 
-                  projectId={selectedProject}
-                  onCodeGenerated={setGeneratedCode}
-                />
-              </CardContent>
-            </Card>
-
             {/* Builder Tabs */}
-            <Tabs defaultValue="code" className="w-full">
-              <TabsList className="grid w-full grid-cols-3">
+            <Tabs defaultValue="chat" className="w-full">
+              <TabsList className="grid w-full grid-cols-4">
+                <TabsTrigger value="chat">
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  AI Chat
+                </TabsTrigger>
                 <TabsTrigger value="code">Code Editor</TabsTrigger>
                 <TabsTrigger value="preview">Live Preview</TabsTrigger>
                 <TabsTrigger value="api">API Builder</TabsTrigger>
               </TabsList>
+
+              <TabsContent value="chat" className="mt-6">
+                <div className="h-[600px]">
+                  <AIChatBox 
+                    projectId={selectedProject}
+                    onCodeGenerated={setGeneratedCode}
+                  />
+                </div>
+              </TabsContent>
 
               <TabsContent value="code" className="mt-6">
                 <CodeEditor 
