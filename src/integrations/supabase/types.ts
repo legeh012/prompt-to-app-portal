@@ -14,7 +14,133 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      "Academic copilot": {
+        Row: {
+          created_at: string
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+        }
+        Relationships: []
+      }
+      components: {
+        Row: {
+          code: string
+          created_at: string | null
+          id: string
+          name: string
+          project_id: string
+          type: string
+        }
+        Insert: {
+          code: string
+          created_at?: string | null
+          id?: string
+          name: string
+          project_id: string
+          type: string
+        }
+        Update: {
+          code?: string
+          created_at?: string | null
+          id?: string
+          name?: string
+          project_id?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "components_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      generations: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          error: string | null
+          id: string
+          project_id: string
+          prompt: string
+          result: string | null
+          status: Database["public"]["Enums"]["generation_status"] | null
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          error?: string | null
+          id?: string
+          project_id: string
+          prompt: string
+          result?: string | null
+          status?: Database["public"]["Enums"]["generation_status"] | null
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          error?: string | null
+          id?: string
+          project_id?: string
+          prompt?: string
+          result?: string | null
+          status?: Database["public"]["Enums"]["generation_status"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "generations_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      projects: {
+        Row: {
+          code: string | null
+          config: Json | null
+          created_at: string | null
+          description: string | null
+          id: string
+          name: string
+          type: Database["public"]["Enums"]["project_type"]
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          code?: string | null
+          config?: Json | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          type: Database["public"]["Enums"]["project_type"]
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          code?: string | null
+          config?: Json | null
+          created_at?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          type?: Database["public"]["Enums"]["project_type"]
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +149,8 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      generation_status: "pending" | "processing" | "completed" | "failed"
+      project_type: "app" | "website" | "api" | "bot"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +277,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      generation_status: ["pending", "processing", "completed", "failed"],
+      project_type: ["app", "website", "api", "bot"],
+    },
   },
 } as const
